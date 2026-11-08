@@ -311,7 +311,7 @@ function nearMiss(){cr+=2;cbar=Math.min(100,cbar+20);msg={s:'😎 RASPOU! +2',t:
 function reset(){objs.forEach(function(o){SC.remove(o.m)});objs=[];mag=shd=dj=slow=jn=cbar=boost=gbv=lastHit=0;chz=14;shot=null;if(bf){SC.remove(bf.m);bf=null}B.position.y=-K;dist=0;dm=0;spd=14;lane=0;pl=0;py=0;vy=0;air=false;hp=3;inv=0;sup=0;cr=0;nx=30;msg=null;tk=null;tn=0;pRamp=false;pRail=false;gt=0;grind=false;wasG=false;wi=0;settrees();P.rotation.set(0,0,0);Q.rotation.set(0,0,0);B.rotation.set(0,0,0)}
 function go(d){if(st!='play')return;lane=Math.max(-1,Math.min(1,lane+d));snd(300,.05)}
 function jump(){if(st!='play')return;if(!air){vy=10.5;air=true;py+=.02;jn=0;snd(520,.12,'square',.05)}else if(dj>0&&jn<1&&!tk){vy=10;jn=1;spark(pl*LW,py+.2,0,'#a5d6a7',10,5);snd(660,.12,'square',.05)}}
-function act(){if(st!='play')return;if(air&&dj>0&&jn<1&&!tk&&py>.3)jump();else act()}
+function act(){if(st!='play')return;if(!air)jump();else if(dj>0&&jn<1&&!tk&&py>.3)jump();else trick()}
 function trick(){if(st!='play'||!air||tk||py<.6)return;var ty=ti++%5;tk={t:0,type:ty};tn++;mp('trick',1);var pts=tn*3*cmul();cr+=pts;cbar=Math.min(100,cbar+30);vib(20);msg={s:TN[ty]+' +'+pts,t:1.1};snd(700+tn*120,.2,'triangle',.07);spark(pl*LW,py+1.5,0,'#ffd23f',12,6)}
 function confetti(){for(var j=0;j<70;j++)spark(pl*LW,3,0,'hsl('+Math.floor(Math.random()*360)+',90%,60%)',1,14,1.6)}
 function world(dt){var w=WD[wi],c=WC[wi],k=Math.min(1,dt*1.5),j;for(j in PC)PC[j].lerp(c[j],k);
